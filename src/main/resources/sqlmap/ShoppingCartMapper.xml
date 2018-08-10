@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bingo.springmvc.dao.ShoppingCartMapper" >
+  <resultMap id="BaseResultMap" type="com.bingo.springmvc.entity.ShoppingCart" >
+    <constructor >
+      <idArg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHOP_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRODUCT_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_PRODUCT_EXISTS" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="AMOUNT" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="CREATED_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, SHOP_ID, PRODUCT_ID, IS_PRODUCT_EXISTS, AMOUNT, CREATED_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SHOPPINGCART
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SHOPPINGCART
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bingo.springmvc.entity.ShoppingCart" >
+    insert into SHOPPINGCART (ID, USER_ID, SHOP_ID, 
+      PRODUCT_ID, IS_PRODUCT_EXISTS, AMOUNT, 
+      CREATED_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{productId,jdbcType=VARCHAR}, #{isProductExists,jdbcType=CHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bingo.springmvc.entity.ShoppingCart" >
+    insert into SHOPPINGCART
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="isProductExists != null" >
+        IS_PRODUCT_EXISTS,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="isProductExists != null" >
+        #{isProductExists,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bingo.springmvc.entity.ShoppingCart" >
+    update SHOPPINGCART
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="isProductExists != null" >
+        IS_PRODUCT_EXISTS = #{isProductExists,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bingo.springmvc.entity.ShoppingCart" >
+    update SHOPPINGCART
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      IS_PRODUCT_EXISTS = #{isProductExists,jdbcType=CHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

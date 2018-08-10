@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bingo.springmvc.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.bingo.springmvc.entity.User" >
+    <constructor >
+      <idArg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASSWORD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USERNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USERTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REGTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="REGIP" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, EMAIL, TEL, PASSWORD, USERNAME, USERTYPE, STATUS, REGTIME, REGIP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERINFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USERINFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bingo.springmvc.entity.User" >
+    insert into USERINFO (ID, EMAIL, TEL, 
+      PASSWORD, USERNAME, USERTYPE, 
+      STATUS, REGTIME, REGIP
+      )
+    values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, #{regip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bingo.springmvc.entity.User" >
+    insert into USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="usertype != null" >
+        USERTYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="regtime != null" >
+        REGTIME,
+      </if>
+      <if test="regip != null" >
+        REGIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bingo.springmvc.entity.User" >
+    update USERINFO
+    <set >
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        USERTYPE = #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        REGTIME = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        REGIP = #{regip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bingo.springmvc.entity.User" >
+    update USERINFO
+    set EMAIL = #{email,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      USERTYPE = #{usertype,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REGTIME = #{regtime,jdbcType=TIMESTAMP},
+      REGIP = #{regip,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
